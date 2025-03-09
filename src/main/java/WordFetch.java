@@ -3,7 +3,6 @@ import org.json.JSONObject;
 
 import java.net.*;
 import java.io.*;
-import org.json.JSONObject;
 
 public class WordFetch {
 

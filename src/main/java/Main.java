@@ -1,6 +1,7 @@
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.json.JSONObject;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -12,11 +13,18 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static String channelId;
+    public static String geminiToken;
 
     public static void main(String[] args) {
 
+        if(args.length < 3){
+            System.out.println("Arguments missing... [bot token] [channel id] [gemini token]");
+            System.exit(-1);
+        }
+
         String token = args[0];
         channelId = args[1];
+        geminiToken = args[2];
 
         JDA jda = JDABuilder.createLight(token, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT))
                 .addEventListeners(new WordRegisterListener())
@@ -24,7 +32,7 @@ public class Main {
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime target = now.toLocalDate().atTime(
-                10, 0
+                22, 47
         );
 
 //        LocalDateTime target = now.toLocalDate().atTime(
@@ -48,5 +56,11 @@ public class Main {
                     TimedWordGet.sendDailyWord(jda);
                 },initialDelay,period, TimeUnit.MILLISECONDS
         );
+
+
+
+
+        SentenceCheck.score("I am grieving the loss of a loved one.", "grieve");
+
     }
 }
