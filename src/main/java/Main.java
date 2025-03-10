@@ -32,17 +32,16 @@ public class Main {
                 .build();
 
         LocalDateTime now = LocalDateTime.now();
+
+        //10 O Clock target
         LocalDateTime target = now.toLocalDate().atTime(
-                14, 21
+                10, 00
         );
 
-//        LocalDateTime target = now.toLocalDate().atTime(
-//                16, 22
-//        );
 
         //add a day if the target for today is already missed.
         if(now.isAfter(target))
-            target.plusDays(1);
+            target = target.plusDays(1);
 
         //Milliseconds between now and target time
         Long initialDelay = Duration.between(now, target).toMillis();
@@ -55,7 +54,7 @@ public class Main {
         scheduler.scheduleAtFixedRate(
                 () -> {
                     TimedWordGet.sendDailyWord(jda);
-                },initialDelay,period, TimeUnit.MILLISECONDS
+                },initialDelay, period, TimeUnit.MILLISECONDS
         );
     }
 }

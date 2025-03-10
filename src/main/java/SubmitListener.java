@@ -4,7 +4,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.json.JSONObject;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class SubmitListener extends ListenerAdapter {
     //on submit - get it done.
@@ -21,10 +21,6 @@ public class SubmitListener extends ListenerAdapter {
             }
             String[] messageParts = event.getMessage().getContentDisplay().split(" ", 2);
             String sentence = messageParts[1];
-            if(!sentence.contains(word)){
-                channel.sendMessage("Use the word in the sentence : " + word).queue();
-                return;
-            }
 
             JSONObject result = SentenceCheck.score(sentence, word);
             channel.sendMessageEmbeds(

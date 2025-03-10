@@ -3,8 +3,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.json.JSONObject;
 
-import java.awt.*;
-import java.io.*;
+import java.awt.Color;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class TimedWordGet {
 

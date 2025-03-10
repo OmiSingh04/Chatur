@@ -12,6 +12,7 @@ target/
 *.iml
 *.ipr
 .idea/
+word_day.txt
 
 ### Eclipse ###
 .apt_generated
