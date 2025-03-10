@@ -28,11 +28,12 @@ public class Main {
 
         JDA jda = JDABuilder.createLight(token, EnumSet.of(GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT))
                 .addEventListeners(new WordRegisterListener())
+                .addEventListeners(new SubmitListener())
                 .build();
 
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime target = now.toLocalDate().atTime(
-                22, 47
+                14, 21
         );
 
 //        LocalDateTime target = now.toLocalDate().atTime(
@@ -56,11 +57,5 @@ public class Main {
                     TimedWordGet.sendDailyWord(jda);
                 },initialDelay,period, TimeUnit.MILLISECONDS
         );
-
-
-
-
-        SentenceCheck.score("I am grieving the loss of a loved one.", "grieve");
-
     }
 }

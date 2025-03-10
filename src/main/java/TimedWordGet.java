@@ -1,11 +1,10 @@
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.channel.Channel;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import org.json.JSONObject;
 
 import java.awt.*;
+import java.io.*;
 
 public class TimedWordGet {
 
@@ -14,7 +13,7 @@ public class TimedWordGet {
         JSONObject json = WordFetch.fetchWord();
         String word = json.get("word").toString();
         String definition = json.get("definition").toString();
-
+        handleFileWrite(word);
         TextChannel channel = jda.getTextChannelById(Main.channelId);
         channel.sendMessageEmbeds(
                 new EmbedBuilder()
@@ -25,6 +24,33 @@ public class TimedWordGet {
                         .addField("Definition", definition, false).build()
         ).queue();
 
+    }
+
+    public static void handleFileWrite(String word){
+        try{
+            FileWriter writer = new FileWriter("word_day.txt");
+            writer.write(word);
+            writer.close();
+        }catch(IOException e){
+            e.getStackTrace();
+        }
+    }
+
+    public static String handleFileRead(){
+        String result = "";
+        try{
+            FileReader reader = new FileReader("word_day.txt");
+            StringBuilder content = new StringBuilder();
+            int i;
+            while((i=reader.read())!=-1){
+                content.append((char)i);
+            }
+            reader.close();
+            result = content.toString();
+        } catch(Exception e){
+            e.getStackTrace();
+        }
+        return result;
     }
 
 }

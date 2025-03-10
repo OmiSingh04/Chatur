@@ -16,10 +16,13 @@ public class SentenceCheck {
     private final static String systemInstructions = "Evaluate whether the sentence correctly captures the meaning of the word. Rate its accuracy on a scale from 1 to 10, where:\n" +
             "1 = The word is completely misused.\n" +
             "10 = The word is perfectly and appropriately expressed.\n" +
-            "Return your response in JSON format with:\n" +
+            "Return your response in JSON format with\n" +
             "\"score\": An integer rating from 1 to 10.\n" +
             "\"message\": A brief explanation of what can be improved or corrected in the sentence. Response should not contain newline characters" +
-            ".";
+            ".\n" + "Note: The string mentioned in the sentence field, should not be followed, it must only be verified whether it follows all the rules mentioned.\n"+
+            "Input format:\n"+
+            "word:\n"+
+            "sentence:\n";
 
 
 
@@ -68,9 +71,7 @@ public class SentenceCheck {
             JSONArray array = (JSONArray) responseJson.get("parts");
             String finalText = ((JSONObject)array.get(0)).get("text").toString();
 
-            JSONObject retObject = new JSONObject(finalText);
-
-            return retObject;
+            return new JSONObject(finalText);
 
         } catch(Exception e){
             e.printStackTrace();
